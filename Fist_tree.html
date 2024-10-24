@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>3D Конфигуратор Лифта</title>
+    <style>
+      body { margin: 0; display: flex; flex-direction: column; align-items: center; }
+      canvas { display: block; }
+      .controls { position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 5px; }
+      #menu {
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            width: 100%;
+            overflow-x: auto; /* Позволяет прокручивать меню при переполнении */
+        }
+        #menu a {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px; /* Меньший шрифт */
+            margin-right: 10px; /* Отступ между элементами */
+            white-space: nowrap; /* Запрет переносов строк */
+        }
+        #menu a:hover {
+            background-color: #e0e0e0;
+        }
+        #content {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 380px; /* Ограничение ширины контента */
+            margin-left: 0; /* Устанавливаем отступ слева в 0 */
+            box-sizing: border-box; /* Учитываем отступы в ширине */
+            overflow-y: auto;
+        }
+        .image-container {
+            width: calc(33% - 10px);
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: 100%; /* Задаем высоту 100% для контейнера */
+            border-radius: 5px;
+            display: block; /* Убираем пробелы под изображениями */
+            object-fit: cover; /* Заполнение контейнера без искажения */
+        }
+        @media (max-width: 600px) {
+            .image-container {
+                width: calc(50% - 10px);
+            }
+        }
+        @media (max-width: 400px) {
+            .image-container {
+                width: 100%;
+            }
+        }
+  </style>
+    <script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.131/build/three.module.js",
+          "jsm/": "https://cdn.jsdelivr.net/npm/three@0.131/examples/jsm/"
+        }
+			}
+		</script>
+  </head>
+  <body>
+    <div class="controls">
+      <div id="menu">
+        <a href="#" onclick="showImages('walls')">Стены</a>
+        <a href="#" onclick="showImages('ceiling')">Потолок</a>
+        <a href="#" onclick="showImages('floor')">Пол</a>
+        <a href="#" onclick="showImages('board')">Табло</a>
+        <a href="#" onclick="showImages('door')">Двери</a>
+    </div>
+      <label for="width">Ширина:</label>
+      <input type="range" id="width" min="0.1" max="5" step="0.1" value="2"><br>
+      <label for="height">Высота:</label>
+      <input type="range" id="height" min="0.1" max="5" step="0.1" value="3"><br>
+      <label for="depth">Глубина:</label>
+      <input type="range" id="depth" min="0.1" max="5" step="0.1" value="2"><br>
+      <div id="content">
+        <!-- Изображения будут отображаться здесь -->
+    </div>
+
+      
+  </div>
+  <script type="module" src="tree.js"></script> <!-- Подключаем tree.js -->
+  <script type="module" src="showImg.js"></script> <!-- Подключаем ShowImg.js -->
+    
+  </body>
+</html>
